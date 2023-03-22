@@ -64,6 +64,11 @@ extension Model {
     public enum Whisper: String, ModelID {
         case whisper1 = "whisper-1"
     }
+
+    public enum GPT4: String, ModelID {
+        case gpt4 = "gpt-4"
+        case gpt4_0314 = "gpt-4-0314"
+    }
 }
 
 extension RawRepresentable where RawValue == String {

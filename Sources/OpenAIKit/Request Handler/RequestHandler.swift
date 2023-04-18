@@ -23,7 +23,7 @@ struct RequestHandler {
     func generateURL(for request: Request) throws -> String {
         var components = URLComponents()
         components.scheme = request.scheme
-        components.host = request.host
+        components.host = configuration.host
         components.path = request.path
             
         guard let url = components.url else {

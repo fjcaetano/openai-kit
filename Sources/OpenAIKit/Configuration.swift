@@ -1,10 +1,22 @@
 import NIOHTTP1
+import Foundation
 
 public struct Configuration {
     public let apiKey: String
     public let organization: String?
+    public let host: String
+    let headers: HTTPHeaders
     
-    var headers: HTTPHeaders {
+    public init(
+        apiKey: String,
+        organization: String? = nil,
+        host: String = "api.openai.com",
+        customHeaders: [String: String] = [:]
+    ) {
+        self.apiKey = apiKey
+        self.organization = organization
+        self.host = host
+        
         var headers = HTTPHeaders()
         headers.add(name: "Authorization", value: "Bearer \(apiKey)")
 
@@ -12,15 +24,10 @@ public struct Configuration {
             headers.add(name: "OpenAI-Organization", value: organization)
         }
         
-        return headers
+        customHeaders.keys.forEach { key in
+            headers.add(name: key, value: customHeaders[key] ?? "")
+        }
+        
+        self.headers = headers
     }
-    
-    public init(
-        apiKey: String,
-        organization: String? = nil
-    ) {
-        self.apiKey = apiKey
-        self.organization = organization
-    }
-    
 }

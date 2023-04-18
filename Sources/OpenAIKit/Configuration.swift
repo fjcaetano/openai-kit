@@ -5,7 +5,7 @@ public struct Configuration {
     public let apiKey: String
     public let organization: String?
     public let host: String
-    var headers: HTTPHeaders
+    let headers: HTTPHeaders
     
     public init(
         apiKey: String,
